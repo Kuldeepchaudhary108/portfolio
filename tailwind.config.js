@@ -1,24 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        primary: "#050816",
-        secondary: "#aaa6c3",
-        tertiary: "#151030",
-        "black-100": "#100d25",
-        "black-200": "#090325",
-        "white-100": "#f3f3f3",
+        'neo-yellow': '#FBFF48',
+        'neo-pink': '#FF70A6',
+        'neo-blue': '#3B82F6',
+        'neo-green': '#33FF57',
+        'neo-purple': '#A855F7',
+        'neo-orange': '#FF9F1C',
+        'neo-red': '#FF2A2A',
+        'neo-white': '#FFFDF5',
+        'neo-black': '#121212',
+      },
+      fontFamily: {
+        display: ['"Space Grotesk"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
-        card: "0px 35px 120px -15px #211e35",
-      },
-      screens: {
-        xs: "450px",
-      },
-      backgroundImage: {
-        "hero-pattern": "url('/src/assets/herobg.png')",
+        hard: '4px 4px 0px 0px #000',
+        'hard-sm': '2px 2px 0px 0px #000',
+        'hard-lg': '8px 8px 0px 0px #000',
+        'hard-xl': '12px 12px 0px 0px #000',
       },
     },
   },

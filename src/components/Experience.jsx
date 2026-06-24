@@ -1,88 +1,31 @@
-import React from "react";
-// import {
-//   VerticalTimeline,
-//   VerticalTimelineElement,
-// } from "react-vertical-timeline-component";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
-import { motion } from "framer-motion";
+import { experienceEntries } from '../data';
 
-import { styles } from "../styles";
-import { experiences } from "../constants";
-import { SectionWrapper } from "../hoc";
-import { textVariant } from "../utils/motion";
-
-const ExperienceCard = ({ experience }) => {
+export default function Experience() {
   return (
-    <VerticalTimelineElement
-      contentStyle={{
-        background: "#1d1836",
-        color: "#fff",
-      }}
-      contentArrowStyle={{ borderRight: "7px solid  #232631" }}
-      date={experience.date}
-      iconStyle={{ background: experience.iconBg }}
-      icon={
-        <div className="flex justify-center items-center w-full h-full">
-          <img
-            src={experience.icon}
-            alt={experience.company_name}
-            className="w-[60%] h-[60%] object-contain"
-          />
-        </div>
-      }
-    >
-      <div>
-        <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
-        <p
-          className="text-secondary text-[16px] font-semibold"
-          style={{ margin: 0 }}
-        >
-          {experience.company_name}
-        </p>
-      </div>
+    <section id="experience" className="mx-auto max-w-7xl px-4 py-24">
+      <h2 className="mb-12 text-center text-5xl font-black uppercase tracking-tighter md:text-8xl">
+        Experience<span className="text-neo-red">_Log</span>
+      </h2>
 
-      <ul className="mt-5 list-disc ml-5 space-y-2">
-        {experience.points.map((point, index) => (
-          <li
-            key={`experience-point-${index}`}
-            className="text-white-100 text-[14px] pl-1 tracking-wider"
-          >
-            {point}
-          </li>
+      <div className="relative ml-4 space-y-12 border-l-4 border-black md:ml-10">
+        {experienceEntries.map((entry) => (
+          <div key={entry.title} className="reveal relative pl-8 md:pl-16">
+            <div className={`absolute -left-[14px] top-2 h-6 w-6 border-4 border-black ${entry.accent}`} />
+            <div className="border-4 border-black bg-white p-6 shadow-hard transition-all hover:shadow-hard-xl">
+              <div className="mb-4 flex flex-col items-start justify-between border-b-2 border-dashed border-gray-300 pb-4 md:flex-row md:items-center">
+                <h3 className="text-3xl font-black uppercase">{entry.title}</h3>
+                <span className="bg-neo-black px-2 py-1 font-mono font-bold text-white">{entry.date}</span>
+              </div>
+              <p className={`mb-2 font-mono text-xl font-bold ${entry.orgClass}`}>{entry.org}</p>
+              <ul className="list-inside list-disc space-y-1 font-mono text-gray-700">
+                {entry.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
         ))}
-      </ul>
-    </VerticalTimelineElement>
-  );
-};
-
-const Experience = () => {
-  return (
-    <>
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} text-center`}>
-          What I have done so far
-        </p>
-        <h2 className={`${styles.sectionHeadText} text-center`}>
-          Work Experience.
-        </h2>
-      </motion.div>
-
-      <div className="mt-20 flex flex-col">
-        <VerticalTimeline>
-          {experiences.map((experience, index) => (
-            <ExperienceCard
-              key={`experience-${index}`}
-              experience={experience}
-            />
-          ))}
-        </VerticalTimeline>
       </div>
-    </>
+    </section>
   );
-};
-
-export default SectionWrapper(Experience, "work");
+}

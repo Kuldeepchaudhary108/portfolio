@@ -1,102 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-import { styles } from "../styles";
-import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
-
-const Navbar = () => {
-  const [active, setActive] = useState("");
-  const [toggle, setToggle] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+export default function Navbar() {
   return (
-    <nav
-      className={`${
-        styles.paddingX
-      } w-full flex items-center py-5 fixed top-0 z-20 ${
-        scrolled ? "bg-primary" : "bg-transparent"
-      }`}
-    >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        <Link
-          to="/"
-          className="flex items-center gap-2"
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-          }}
+    <nav className="pointer-events-none fixed top-0 z-50 w-full px-4 py-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between pointer-events-auto">
+        <a
+          href="#"
+          className="cursor-hover border-2 border-black bg-neo-white px-4 py-1 text-2xl font-black shadow-hard transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-neo-yellow hover:shadow-none"
         >
-          <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
-          <p className="text-white text-[18px] font-bold cursor-pointer flex ">
-            Kuldeep &nbsp;
-            <span className="sm:block hidden"> | chaudhary</span>
-          </p>
-        </Link>
+          Kuldeep.exe
+        </a>
 
-        <ul className="list-none hidden sm:flex flex-row gap-10">
-          {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
-            >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="sm:hidden flex flex-1 justify-end items-center">
-          <img
-            src={toggle ? close : menu}
-            alt="menu"
-            className="w-[28px] h-[28px] object-contain"
-            onClick={() => setToggle(!toggle)}
-          />
-
-          <div
-            className={`${
-              !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
-          >
-            <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
-              {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-white" : "text-secondary"
-                  }`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
-                >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="hidden gap-4 border-2 border-black bg-white p-2 shadow-hard md:flex">
+          <a href="#about" className="cursor-hover px-3 py-1 font-mono text-sm font-bold transition-colors hover:bg-black hover:text-white">
+            /ABOUT
+          </a>
+          <a href="#skills" className="cursor-hover px-3 py-1 font-mono text-sm font-bold transition-colors hover:bg-black hover:text-white">
+            /SKILLS
+          </a>
+          <a href="#experience" className="cursor-hover px-3 py-1 font-mono text-sm font-bold transition-colors hover:bg-black hover:text-white">
+            /LOGS
+          </a>
+          <a href="#projects" className="cursor-hover px-3 py-1 font-mono text-sm font-bold transition-colors hover:bg-black hover:text-white">
+            /WORK
+          </a>
+          <a href="#contact" className="cursor-hover border border-black bg-neo-yellow px-3 py-1 font-mono text-sm font-bold transition-colors hover:bg-neo-pink">
+            HIRE ME
+          </a>
         </div>
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}
